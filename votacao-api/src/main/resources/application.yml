@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: votacao-api
+  datasource:
+    password: 1234
+    username: admin
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/votacao_db
+  servlet:
+    multipart:
+      max-request-size: 1MB
+      max-file-size: 1MB
+      enabled: true
+  jpa:
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    database: postgresql
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8080
