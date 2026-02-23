@@ -7,7 +7,6 @@ import br.com.ueder.votacao_api.services.CargoService;
 import br.com.ueder.votacao_api.utils.Util;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

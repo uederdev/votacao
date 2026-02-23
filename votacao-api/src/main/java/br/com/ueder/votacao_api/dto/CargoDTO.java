@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 public record CargoDTO(
         Long id,
         @NotBlank
-        @Size(min = 3)
+        @Size(min = 3, max = 80)
         String descricao
 ) {
     public CargoDTO(Cargo cargo) {
@@ -15,6 +15,6 @@ public record CargoDTO(
     }
 
     public Cargo toModel(){
-        return new Cargo(this.id(), this.descricao());
+        return new Cargo(this);
     }
 }

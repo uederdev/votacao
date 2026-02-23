@@ -1,23 +1,21 @@
 package br.com.ueder.votacao_api.domains;
 
-import br.com.ueder.votacao_api.dto.CargoDTO;
+import br.com.ueder.votacao_api.dto.SetorDTO;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "cargos")
-public class Cargo {
+@Table(name = "setores")
+public class Setor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "descricao", length = 80, nullable = false)
+    @Column(name = "descricao", unique = true, nullable = false, length = 80)
     private String descricao;
-
-    @Column(name = "ativo", nullable = false)
-    private Boolean ativo = true;
 
     @Column(name = "data_cad", nullable = false)
     private LocalDateTime dataCriacao = LocalDateTime.now();
@@ -25,11 +23,14 @@ public class Cargo {
     @Column(name = "data_alt")
     private LocalDateTime dataAtualizacao;
 
-    public Cargo() {}
+    @Column(name = "ativo", nullable = false)
+    private Boolean ativo = true;
 
-    public Cargo(CargoDTO cargo) {
-        this.id = cargo.id();
-        this.descricao = cargo.descricao();
+    public Setor() { }
+
+    public Setor(SetorDTO dto) {
+        this.id = dto.id();
+        this.descricao = dto.descricao();
     }
 
     public Long getId() {
@@ -48,10 +49,6 @@ public class Cargo {
         this.descricao = descricao;
     }
 
-    public Boolean getAtivo() {
-        return ativo;
-    }
-
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
@@ -61,12 +58,16 @@ public class Cargo {
     }
 
     @PreUpdate
-    public void update(){
+    public void update() {
         this.dataAtualizacao = LocalDateTime.now();
     }
 
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
     public void excluir() {
-        this.dataAtualizacao = LocalDateTime.now();
         this.ativo = false;
+        this.dataAtualizacao = LocalDateTime.now();
     }
 }

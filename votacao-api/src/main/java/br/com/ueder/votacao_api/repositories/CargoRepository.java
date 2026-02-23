@@ -10,12 +10,10 @@ import java.util.List;
 @Repository
 public interface CargoRepository extends JpaRepository<Cargo, Integer> {
 
-    @Query(value = "select c from Cargo c where c.ativo = :ativo")
+    @Query(value = "select c from Cargo c where c.ativo = :ativo and upper(c.descricao) like upper(:descricao) ")
     List<Cargo> findByDescricao(String descricao, Boolean ativo);
 
     @Query(value = "select c from Cargo c where c.ativo = :ativo")
     List<Cargo> findAll(Boolean ativo);
-
-
 
 }

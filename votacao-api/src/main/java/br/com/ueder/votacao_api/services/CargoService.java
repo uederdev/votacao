@@ -18,7 +18,6 @@ public class CargoService implements IService<Cargo, CargoDTO> {
         this.cargoRepository = cargoRepository;
     }
 
-
     @Override
     @Transactional
     public Cargo save(CargoDTO entity) {
@@ -42,7 +41,7 @@ public class CargoService implements IService<Cargo, CargoDTO> {
     @Override
     public Cargo findById(String id) {
         return cargoRepository.findById(Integer.valueOf(id))
-                .orElseThrow(() -> new ObjectNotFoundException(id));
+                .orElseThrow(() -> new ObjectNotFoundException("Cargo -> " + id));
     }
 
     @Override
@@ -52,6 +51,6 @@ public class CargoService implements IService<Cargo, CargoDTO> {
 
     @Override
     public List<Cargo> findByDescricao(String descricao) {
-        return cargoRepository.findByDescricao(descricao, true);
+        return cargoRepository.findByDescricao(descricao + "%", true);
     }
 }
